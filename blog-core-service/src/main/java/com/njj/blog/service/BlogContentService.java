@@ -5,6 +5,8 @@ import com.njj.blog.entity.BlogMetadataInfo;
 import com.njj.blog.entity.BlogRequestBody;
 import com.njj.blog.entity.BlogResponseData;
 
+import java.util.List;
+
 
 /**
  * @author 倪佳俊
@@ -40,4 +42,12 @@ public interface BlogContentService {
      * @param blogMetaDataId 博客元数据ID
      */
     void publishBlog(String blogMetaDataId);
+
+    /**
+     *获取指定发布模式的所有博客
+     *
+     * @param publishMode 发布模式
+     * @return 返还指定发布模式的所有博客
+     */
+    List<BlogMetadataInfo> getAllBlogMetadataByPublishMode(String publishMode);
 }

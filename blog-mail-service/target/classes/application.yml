@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: blog-mail-service
+
+  mail:
+    username: njj1108@outlook.com
+    password: 890890iopP
+    host: smtp.office365.com
+    port: 587
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          ssl:
+            socketFactory:
+              class: com.sun.mail.util.MailSSLSocketFactory
+              fallback: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

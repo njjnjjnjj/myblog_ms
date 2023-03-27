@@ -98,7 +98,7 @@ public class BlogContentServiceImp implements BlogContentService {
 
     @Override
     public Page<BlogMetadataInfo> queryBlogMetadataByPublishMode(Page<BlogMetadataInfo> page, String publishMode) {
-        LambdaQueryWrapper<BlogMetadataInfo> blogMetadataInfoLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<BlogMetadataInfo> blogMetadataInfoLambdaQueryWrapper = new LambdaQueryWrapper<BlogMetadataInfo>();
         blogMetadataInfoLambdaQueryWrapper.eq(BlogMetadataInfo::getPublishMode,publishMode);
         return blogMetadataInfoMapper.selectPage(page, blogMetadataInfoLambdaQueryWrapper);
     }
@@ -109,6 +109,13 @@ public class BlogContentServiceImp implements BlogContentService {
         blogMetadataInfo.setPublishDatetime(new Timestamp(System.currentTimeMillis()));
         blogMetadataInfo.setPublishMode(BlogMetadataInfo.PUBLISH_MODE_PUBLISHED);
         blogMetadataInfoMapper.updateById(blogMetadataInfo);
+    }
+
+    @Override
+    public List<BlogMetadataInfo> getAllBlogMetadataByPublishMode(String publishMode) {
+        LambdaQueryWrapper<BlogMetadataInfo> blogMetadataInfoLambdaQueryWrapper = new LambdaQueryWrapper<BlogMetadataInfo>();
+        blogMetadataInfoLambdaQueryWrapper.eq(BlogMetadataInfo::getPublishMode,publishMode);
+        return blogMetadataInfoMapper.selectList(blogMetadataInfoLambdaQueryWrapper);
     }
 
 //    /**

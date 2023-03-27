@@ -2,6 +2,8 @@ package com.njj.blog.common.response;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 /**
  * 响应结果实体
@@ -12,7 +14,10 @@ import lombok.Data;
 @Data
 @Builder
 public class ResponseResult<T> {
+    @Tolerate
+    public ResponseResult(){
 
+    }
     /**
      * 响应时间戳
      */

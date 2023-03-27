@@ -10,6 +10,8 @@ import com.njj.blog.service.BlogContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author 倪佳俊
  * @date 2023/2/11
@@ -37,6 +39,12 @@ public class BlogContentController {
     public ResponseResult<Page<BlogMetadataInfo>> queryBlog(Page<BlogMetadataInfo> page, @PathVariable("publishMode") String publishMode){
         Page<BlogMetadataInfo> blogResponseDataPage = blogContentService.queryBlogMetadataByPublishMode(page,publishMode);
         return ResponseUtil.success(blogResponseDataPage);
+    }
+
+    @GetMapping("/content/query/all/{publishMode}")
+    public ResponseResult<List<BlogMetadataInfo>> getAllBlog(@PathVariable("publishMode") String publishMode){
+        blogContentService.getAllBlogMetadataByPublishMode(publishMode);
+        return ResponseUtil.success();
     }
 
     @Autowired

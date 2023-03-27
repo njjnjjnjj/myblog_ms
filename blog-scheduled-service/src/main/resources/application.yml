@@ -1,0 +1,13 @@
+spring:
+  redis:
+    database: 0
+    port: 6379
+    password:
+    host: 127.0.0.1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
