@@ -8,6 +8,6 @@ eureka:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
 #    register-with-eureka: false
-#    fetch-registry: false
+    fetch-registry: false
   instance:
     prefer-ip-address: true

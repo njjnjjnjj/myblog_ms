@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.njj.blog.picture</groupId>
-    <artifactId>picture-bed-service</artifactId>
+    <artifactId>blog-file-service</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -7,8 +7,8 @@
         <module>eureka-server</module>
         <module>blog-core-service</module>
         <module>blog-common</module>
-        <module>picture-bed-service</module>
         <module>blog-mail-service</module>
+        <module>blog-file-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
