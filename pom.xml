@@ -6,8 +6,7 @@
     <modules>
         <module>eureka-server</module>
         <module>blog-core-service</module>
-        <module>blog-common-service</module>
-        <module>blog-scheduled-service</module>
+        <module>blog-common</module>
         <module>picture-bed-service</module>
         <module>blog-mail-service</module>
     </modules>
@@ -50,7 +49,7 @@
 <!--        公共代码依赖-->
         <dependency>
             <groupId>com.njj.blog.common</groupId>
-            <artifactId>blog-common-service</artifactId>
+            <artifactId>blog-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

@@ -1,6 +1,11 @@
 spring:
   application:
-    name: blogCoreService
+    name: blog-core-service
+  redis:
+    database: 0
+    port: 6379
+    password:
+    host: 127.0.0.1
   datasource:
     name: myblogDatabase
     url: jdbc:mysql://localhost:3306/myblog

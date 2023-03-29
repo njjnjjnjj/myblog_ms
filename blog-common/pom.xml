@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.njj.blog.common</groupId>
-    <artifactId>blog-common-service</artifactId>
+    <artifactId>blog-common</artifactId>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>

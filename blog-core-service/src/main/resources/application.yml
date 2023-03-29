@@ -1,6 +1,6 @@
 spring:
   application:
-    name: blogCoreService
+    name: blog-core-service
   redis:
     database: 0
     port: 6379
