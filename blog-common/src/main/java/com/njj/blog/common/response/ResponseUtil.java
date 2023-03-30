@@ -57,6 +57,21 @@ public class ResponseUtil {
     /**
      * 失败
      *
+     * @param message 错误信息
+     * @return 返还失败的响应体
+     * @param <T> 在这里没什么用的泛型
+     */
+    public static <T> ResponseResult<T> fail(String message){
+        return new ResponseResult.ResponseResultBuilder<T>()
+                .timestamp(new Date().getTime())
+                .status(ResponseStatus.FAIL.getResponseCode())
+                .message(StringUtils.isEmpty(message)?ResponseStatus.FAIL.getDescription() : message)
+                .build();
+    }
+
+    /**
+     * 失败
+     *
      * @param data 需要携带的数据
      * @param message 需要携带的消息
      * @return 返还失败的响应实体

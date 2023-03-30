@@ -4,6 +4,7 @@ package com.njj.blog.service.imp;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.njj.blog.common.response.ResponseResult;
 import com.njj.blog.common.util.common.date.DateUtils;
 import com.njj.blog.common.util.common.string.StringUtils;
 import com.njj.blog.entity.BlogContentInfo;
@@ -13,14 +14,17 @@ import com.njj.blog.entity.BlogResponseData;
 import com.njj.blog.mapper.BlogContentInfoMapper;
 import com.njj.blog.mapper.BlogMetadataInfoMapper;
 import com.njj.blog.service.BlogContentService;
+import com.njj.blog.task.TimedPublishingBlogTask;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,7 +36,9 @@ public class BlogContentServiceImp implements BlogContentService {
     private BlogContentInfoMapper blogContentInfoMapper;
     private BlogMetadataInfoMapper blogMetadataInfoMapper;
 
-//    private RedisTemplate<String, BlogMetadataInfo> redisTemplate;
+    private RedisTemplate<String, BlogMetadataInfo> redisTemplate;
+
+    private RestTemplate restTemplate;
 
     @PostConstruct
     public void init(){
@@ -73,10 +79,15 @@ public class BlogContentServiceImp implements BlogContentService {
             blogContentInfoMapper.insert(builder.build());
             order ++;
         }
-//        // 预发布
-//        if(BlogMetadataInfo.PUBLISH_MODE_PRE_PUBLISH.equals(blogMetadataInfo.getPublishMode())){
-//            addPrePublishBlogToRedis(blogMetadataInfo);
-//        }
+        // 预发布
+        if(BlogMetadataInfo.PUBLISH_MODE_PRE_PUBLISH.equals(blogMetadataInfo.getPublishMode())){
+            addPrePublishBlogToRedis(blogMetadataInfo);
+        }
+        // 发布
+        if(BlogMetadataInfo.PUBLISH_MODE_PUBLISHED.equals(blogMetadataInfo.getPublishMode())){
+            //TODO: 倪佳俊 2023/3/30 22:56 [] 这里存在，数据库的重复操作
+            publishBlog(blogMetadataId);
+        }
     }
 
     @Override
@@ -105,10 +116,14 @@ public class BlogContentServiceImp implements BlogContentService {
 
     @Override
     public void publishBlog(String blogMetaDataId) {
+        // 更新博客状态以及发布时间
         BlogMetadataInfo blogMetadataInfo = blogMetadataInfoMapper.selectById(blogMetaDataId);
         blogMetadataInfo.setPublishDatetime(new Timestamp(System.currentTimeMillis()));
         blogMetadataInfo.setPublishMode(BlogMetadataInfo.PUBLISH_MODE_PUBLISHED);
         blogMetadataInfoMapper.updateById(blogMetadataInfo);
+        // 调用mail服务，发送邮件
+        //TODO: 倪佳俊 2023/3/30 23:01 [] 微服务中的远程调用 序列化 与 反序列化 如何处理？
+        ResponseResult forObject = restTemplate.getForObject("http://blog-mail-service/mail/send", ResponseResult.class);
     }
 
     @Override
@@ -118,14 +133,14 @@ public class BlogContentServiceImp implements BlogContentService {
         return blogMetadataInfoMapper.selectList(blogMetadataInfoLambdaQueryWrapper);
     }
 
-//    /**
-//     * 将预发布的博客保存至 redids
-//     * @param blogMetadataInfo 预发布的博客元数据
-//     */
-//    public void addPrePublishBlogToRedis(BlogMetadataInfo blogMetadataInfo){
-//        ListOperations<String, BlogMetadataInfo> stringBlogMetadataInfoListOperations = redisTemplate.opsForList();
-//        stringBlogMetadataInfoListOperations.leftPush(TimedPublishingBlogTask.PRE_PUBLISHED_BLOG_KEY,blogMetadataInfo);
-//    }
+    /**
+     * 将预发布的博客保存至 redids
+     * @param blogMetadataInfo 预发布的博客元数据
+     */
+    public void addPrePublishBlogToRedis(BlogMetadataInfo blogMetadataInfo){
+        ListOperations<String, BlogMetadataInfo> stringBlogMetadataInfoListOperations = redisTemplate.opsForList();
+        stringBlogMetadataInfoListOperations.leftPush(TimedPublishingBlogTask.PRE_PUBLISHED_BLOG_KEY,blogMetadataInfo);
+    }
 
     private String getBlogContentByMetadataId(String metadataId){
         QueryWrapper<BlogContentInfo> wrapper = new QueryWrapper<>();
@@ -150,8 +165,13 @@ public class BlogContentServiceImp implements BlogContentService {
         this.blogMetadataInfoMapper = blogMetadataInfoMapper;
     }
 
-//    @Resource
-//    public void setRedisTemplate(RedisTemplate<String, BlogMetadataInfo> redisTemplate) {
-//        this.redisTemplate = redisTemplate;
-//    }
+    @Resource
+    public void setRedisTemplate(RedisTemplate<String, BlogMetadataInfo> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+    @Autowired
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 }

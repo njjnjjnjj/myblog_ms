@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: blog-file-service
+
+fileStore:
+  savePath: D:\\FileStore
