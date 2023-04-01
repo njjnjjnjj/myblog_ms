@@ -13,14 +13,22 @@ spring:
     password: 890890iop
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        cluster-name: NJ # 集群名称
+        namespace: 6187f42f-0662-4811-abd3-112ac0e56918
+userservice:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule # 负载均衡规则,调用其他微服务时候，优先调用同集群下的实例
 
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
-  instance:
-    prefer-ip-address: true
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
+#  instance:
+#    prefer-ip-address: true
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml

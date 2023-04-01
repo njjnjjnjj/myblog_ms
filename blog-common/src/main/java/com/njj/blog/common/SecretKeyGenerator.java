@@ -1,3 +1,5 @@
+package com.njj.blog.common;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;

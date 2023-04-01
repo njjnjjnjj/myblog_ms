@@ -1,7 +1,12 @@
 spring:
   application:
     name: blog-mail-service
-
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        cluster-name: NJ # 集群名称
+        namespace: 6187f42f-0662-4811-abd3-112ac0e56918
   mail:
     username: njj1108@outlook.com
     password: 890890iopP
@@ -17,7 +22,7 @@ spring:
             socketFactory:
               class: com.sun.mail.util.MailSSLSocketFactory
               fallback: false
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
