@@ -4,9 +4,11 @@ package com.njj.blog.service.imp;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.njj.blog.feign.clients.MailClient;
 import com.njj.blog.common.response.ResponseResult;
 import com.njj.blog.common.util.common.date.DateUtils;
 import com.njj.blog.common.util.common.string.StringUtils;
+import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
 import com.njj.blog.entity.BlogContentInfo;
 import com.njj.blog.entity.BlogMetadataInfo;
 import com.njj.blog.entity.BlogRequestBody;
@@ -17,14 +19,16 @@ import com.njj.blog.service.BlogContentService;
 import com.njj.blog.task.TimedPublishingBlogTask;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +36,7 @@ import java.util.List;
  * @date 2023/2/11
  */
 @Service
+@RefreshScope
 public class BlogContentServiceImp implements BlogContentService {
     private BlogContentInfoMapper blogContentInfoMapper;
     private BlogMetadataInfoMapper blogMetadataInfoMapper;
@@ -40,10 +45,10 @@ public class BlogContentServiceImp implements BlogContentService {
 
     private RestTemplate restTemplate;
 
-    @PostConstruct
-    public void init(){
+    private MailClient mailClient;
 
-    }
+    @Value("${blog.mail.sendMail}")
+    private boolean sendMail;
 
     @Override
     public void saveBlogContent(BlogRequestBody blogRequestBody) {
@@ -122,8 +127,15 @@ public class BlogContentServiceImp implements BlogContentService {
         blogMetadataInfo.setPublishMode(BlogMetadataInfo.PUBLISH_MODE_PUBLISHED);
         blogMetadataInfoMapper.updateById(blogMetadataInfo);
         // 调用mail服务，发送邮件
-        //TODO: 倪佳俊 2023/3/30 23:01 [] 微服务中的远程调用 序列化 与 反序列化 如何处理？
-        ResponseResult forObject = restTemplate.getForObject("http://blog-mail-service/mail/send", ResponseResult.class);
+        if(sendMail){
+            //TODO: 倪佳俊 2023/4/6 20:56 [] 异步调用，不可阻塞发布博客操作
+            SendMailBlogMetadataDTO blogMetadataDTO = SendMailBlogMetadataDTO.builder().
+                    title(blogMetadataInfo.getTitle()).
+                    contentSummary(blogMetadataInfo.getContentSummary()).
+                    publishDatetime(DateUtils.formatDate(new Date(blogMetadataInfo.getPublishDatetime().getTime()),DateUtils.DATE_FORMAT_DATETIME)).
+                    build();
+            ResponseResult<String> stringResponseResult = mailClient.sendMail(blogMetadataDTO);
+        }
     }
 
     @Override
@@ -173,5 +185,10 @@ public class BlogContentServiceImp implements BlogContentService {
     @Autowired
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+    }
+
+    @Autowired
+    public void setMailClient(MailClient mailClient) {
+        this.mailClient = mailClient;
     }
 }

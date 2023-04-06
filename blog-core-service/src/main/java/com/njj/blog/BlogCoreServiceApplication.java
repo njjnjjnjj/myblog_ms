@@ -4,11 +4,13 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = "com.njj.blog") // spring ioc 扫包配置
 @MapperScan("com.njj.blog.mapper") // mybatis 扫包配置
+@EnableFeignClients(basePackages = "com.njj.blog.clients")
 public class BlogCoreServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogCoreServiceApplication.class,args);

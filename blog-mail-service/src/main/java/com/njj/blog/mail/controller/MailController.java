@@ -1,42 +1,25 @@
 package com.njj.blog.mail.controller;
 
-import com.alibaba.nacos.api.config.annotation.NacosValue;
+import com.njj.blog.feign.clients.MailClient;
 import com.njj.blog.common.response.ResponseResult;
 import com.njj.blog.common.response.ResponseUtil;
+import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
 import com.njj.blog.mail.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.thymeleaf.context.Context;
 
-import javax.annotation.PostConstruct;
-
-@RestController
-@RequestMapping("/mail")
-public class MailController {
-
-//    @Value("${spring.mail.username}")
-    @Value("${test}")
-//    @NacosValue("${test}")
-    private String testConfig;
-
-    @PostConstruct
-    public void init(){
-        System.out.println(testConfig);
-    }
-
+@RestController("/mail")
+//@RequestMapping("/mail")
+public class MailController implements MailClient {
     private MailService mailService;
 
-    @GetMapping("/send")
-    public ResponseResult<Object> sendMail(){
-        mailService.sendMail("just for test");
-        Context context = new Context();
-        context.setVariable("title","this is title");
-        context.setVariable("contentSummary", "this is contentSummary");
-        context.setVariable("publishDatetime","this is publishDatetime");
-        mailService.sendTemplateMail("NewBlogNotification", context);
+//    @PostMapping("/send")
+    @Override
+    public ResponseResult<String> sendMail(@RequestBody SendMailBlogMetadataDTO blogMetadataDTO){
+        //TODO: 倪佳俊 2023/4/6 20:34 [] 发送方式由内部决定
+        mailService.sendTemplateMail(blogMetadataDTO);
+        //TODO: 倪佳俊 2023/4/6 20:42 [] 修改响应结果
         return ResponseUtil.success("");
     }
 
@@ -44,4 +27,4 @@ public class MailController {
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
-}
+} 

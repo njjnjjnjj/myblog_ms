@@ -9,6 +9,7 @@
         <module>blog-common</module>
         <module>blog-mail-service</module>
         <module>blog-file-service</module>
+        <module>feign-api</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -137,6 +138,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.11</version>
+            </dependency>
+            <dependency>
+                <artifactId>feign-api</artifactId>
+                <groupId>com.njj.blog</groupId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
