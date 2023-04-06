@@ -27,4 +27,4 @@ public class MailController implements MailClient {
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
-} 
+}

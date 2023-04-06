@@ -61,7 +61,7 @@
         </dependency>
         <dependency>
             <artifactId>feign-api</artifactId>
-            <groupId>com.njj.blog</groupId>
+            <groupId>com.njj.blog.feign</groupId>
         </dependency>
     </dependencies>
 
