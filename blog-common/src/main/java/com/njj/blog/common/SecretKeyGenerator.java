@@ -19,6 +19,10 @@ public class SecretKeyGenerator {
         }
     }
 
+    public static void code(){
+
+    }
+
     public static void main(String[] args) {
         SecretKey secretKey = generate();
         System.out.println(Base64.getEncoder().encodeToString(secretKey.getEncoded()));

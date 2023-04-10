@@ -43,11 +43,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        SpringMVC相关依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+
 <!--        公共代码依赖-->
         <dependency>
             <groupId>com.njj.blog.common</groupId>
@@ -59,6 +55,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--        SpringMVC相关依赖-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>2.3.8.RELEASE</version>
+            </dependency>
             <!-- springCloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
