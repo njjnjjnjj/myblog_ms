@@ -3,12 +3,14 @@ package com.njj.blog.feign.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 发送邮件DTO
  */
 @Data
 @Builder
-public class SendMailBlogMetadataDTO {
+public class SendMailBlogMetadataDTO implements Serializable {
     /**
      * 博客标题
      */

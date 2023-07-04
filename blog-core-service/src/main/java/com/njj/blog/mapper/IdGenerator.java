@@ -47,6 +47,7 @@ public class IdGenerator implements IdentifierGenerator {
      * @return
      */
     private static String generateId(int idLength) {
+        //TODO: 倪佳俊 2023/6/25 14:56 [] 不再使用时间戳作为主键，虽可通过时间戳来确定记录的生成时间，但会影响性能！
         String dateString = DateUtils.formatCurrentDate(DateUtils.DATE_FORMAT_DATETIME);
         String randomString = RandomStringUtils.random(idLength - dateString.length());
         return dateString + randomString;

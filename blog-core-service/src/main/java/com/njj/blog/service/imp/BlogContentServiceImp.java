@@ -4,6 +4,7 @@ package com.njj.blog.service.imp;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.njj.blog.common.config.RabbitMQConfig;
 import com.njj.blog.feign.clients.MailClient;
 import com.njj.blog.common.response.ResponseResult;
 import com.njj.blog.common.util.common.date.DateUtils;
@@ -17,6 +18,7 @@ import com.njj.blog.mapper.BlogContentInfoMapper;
 import com.njj.blog.mapper.BlogMetadataInfoMapper;
 import com.njj.blog.service.BlogContentService;
 import com.njj.blog.task.TimedPublishingBlogTask;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,6 +46,8 @@ public class BlogContentServiceImp implements BlogContentService {
     private RedisTemplate<String, BlogMetadataInfo> redisTemplate;
 
     private RestTemplate restTemplate;
+
+    private RabbitTemplate rabbitTemplate;
 
     private MailClient mailClient;
 
@@ -128,12 +132,14 @@ public class BlogContentServiceImp implements BlogContentService {
         blogMetadataInfoMapper.updateById(blogMetadataInfo);
         // 调用mail服务，发送邮件
         if(sendMail){
-            //TODO: 倪佳俊 2023/4/6 20:56 [] 异步调用，不可阻塞发布博客操作
             SendMailBlogMetadataDTO blogMetadataDTO = SendMailBlogMetadataDTO.builder().
                     title(blogMetadataInfo.getTitle()).
                     contentSummary(blogMetadataInfo.getContentSummary()).
                     publishDatetime(DateUtils.formatDate(new Date(blogMetadataInfo.getPublishDatetime().getTime()),DateUtils.DATE_FORMAT_DATETIME)).
                     build();
+            // 使用消息队列实现异步调用
+            rabbitTemplate.convertAndSend(RabbitMQConfig.MAIL_DIRECT_EXCHANGE,RabbitMQConfig.MAIL_DIRECT_ROUTING,blogMetadataDTO);
+            //TODO: 倪佳俊 2023/4/6 20:56 [] 异步调用，不可阻塞发布博客操作
             ResponseResult<String> stringResponseResult = mailClient.sendMail(blogMetadataDTO);
         }
     }
@@ -190,5 +196,10 @@ public class BlogContentServiceImp implements BlogContentService {
     @Autowired
     public void setMailClient(MailClient mailClient) {
         this.mailClient = mailClient;
+    }
+
+    @Autowired
+    public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
+        this.rabbitTemplate = rabbitTemplate;
     }
 }

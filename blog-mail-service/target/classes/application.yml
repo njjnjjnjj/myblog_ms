@@ -1,12 +1,17 @@
 spring:
   application:
     name: blog-mail-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     nacos:
-      server-addr: localhost:80
-      discovery:
-        cluster-name: NJ # 集群名称
-        namespace: 6187f42f-0662-4811-abd3-112ac0e56918
+      server-addr: 127.0.0.1:8848
+#      discovery:
+#        cluster-name: NJ # 集群名称
+#        namespace: 6187f42f-0662-4811-abd3-112ac0e56918
   mail:
     username: njj1108@outlook.com
     password: 890890iopP
@@ -22,6 +27,7 @@ spring:
             socketFactory:
               class: com.sun.mail.util.MailSSLSocketFactory
               fallback: false
-blog:
-  mail:
-    newBlogMailTemplate: NewBlogNotification
+# 以下参数交由Nacos配置中心管理
+#blog:
+#  mail:
+#    newBlogMailTemplate: NewBlogNotification

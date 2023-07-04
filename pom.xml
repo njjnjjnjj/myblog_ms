@@ -11,6 +11,8 @@
         <module>blog-file-service</module>
         <module>feign-api</module>
         <module>gateway-server</module>
+        <module>just-for-practices</module>
+        <module>blog-search-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -24,6 +26,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <spring-cloud.version>Hoxton.SR10</spring-cloud.version>
+        <es-version>7.12.1</es-version>
     </properties>
 
     <groupId>com.njj.blog</groupId>
@@ -142,11 +145,23 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.11</version>
             </dependency>
+<!--            feign-api -->
             <dependency>
                 <artifactId>feign-api</artifactId>
                 <groupId>com.njj.blog.feign</groupId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
+<!--            es客户端-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch</groupId>-->
+<!--                <artifactId>elasticsearch</artifactId>-->
+<!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>org.elasticsearch.client</groupId>-->
+<!--                <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
+<!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
 

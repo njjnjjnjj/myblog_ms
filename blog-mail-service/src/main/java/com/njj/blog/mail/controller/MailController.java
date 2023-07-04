@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("/mail")
-//@RequestMapping("/mail")
 public class MailController implements MailClient {
     private MailService mailService;
 
-//    @PostMapping("/send")
     @Override
     public ResponseResult<String> sendMail(@RequestBody SendMailBlogMetadataDTO blogMetadataDTO){
         //TODO: 倪佳俊 2023/4/6 20:34 [] 发送方式由内部决定
