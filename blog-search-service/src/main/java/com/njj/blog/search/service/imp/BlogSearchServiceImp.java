@@ -1,14 +1,12 @@
 package com.njj.blog.search.service.imp;
 
-import com.njj.blog.search.entity.Blog;
+import com.njj.blog.feign.dto.BlogDTO;
 import com.njj.blog.search.repository.BlogRepository;
 import com.njj.blog.search.service.BlogSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author 倪佳俊
@@ -20,10 +18,17 @@ public class BlogSearchServiceImp implements BlogSearchService {
     private BlogRepository blogRepository;
 
     @Override
-    public void searchBlog(String keyWord) {
+    public List<BlogDTO> searchBlog(String keyWord) {
+        //TODO: 倪佳俊 2023/7/8 22:56 [] 实现分页检索
         // 从Es根据keyWord获取相关文档
-        List<Blog> blogByContentLikeOrTitleLike = blogRepository.findBlogByContentLikeOrTitleLike(keyWord, keyWord);
+        return null;
+    }
 
+    @Override
+    public void addBlog(BlogDTO blogDTO) {
+        //TODO: 倪佳俊 2023/7/8 22:59 [] 保存博客信息到ES
+        System.out.println("添加索引！！！");
+//        blogRepository.save(blogDTO);
     }
 
     @Autowired

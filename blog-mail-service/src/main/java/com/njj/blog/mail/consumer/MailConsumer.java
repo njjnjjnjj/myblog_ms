@@ -1,6 +1,6 @@
 package com.njj.blog.mail.consumer;
 
-import com.njj.blog.common.config.RabbitMQConfig;
+import com.njj.blog.common.constans.RabbitMQConstant;
 import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
 import com.njj.blog.mail.service.MailService;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2023/06/25 21:59
  **/
 @Component
-@RabbitListener(queues = RabbitMQConfig.MAIL_TOPIC)
+@RabbitListener(queues = RabbitMQConstant.BLOG_PUBLISH_MAIL_SEND_QUEUE)
 public class MailConsumer {
 
     private MailService mailService;
@@ -21,7 +21,6 @@ public class MailConsumer {
     @RabbitHandler
     public void mailConsumer(SendMailBlogMetadataDTO sendMailBlogMetadataDTO){
         mailService.sendTemplateMail(sendMailBlogMetadataDTO);
-//        System.out.println("收到发送邮件请求！"+sendMailBlogMetadataDTO);
     }
 
     @Autowired

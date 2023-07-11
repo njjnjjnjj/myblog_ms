@@ -13,10 +13,10 @@ import java.util.List;
  **/
 public interface BlogSearchClient {
 
-    @GetMapping("/blog/search")
-    ResponseResult<List<BlogDTO>> searchBlog(String keyword);
-
-    @PostMapping("/blog/add")
-    ResponseResult<String> addBlog(BlogDTO blogDTO);
+//    @GetMapping("/blog/search")
+//    ResponseResult<List<BlogDTO>> searchBlog(String keyword);
+//
+//    @PostMapping("/blog/add")
+//    ResponseResult<String> addBlog(BlogDTO blogDTO);
 
 }

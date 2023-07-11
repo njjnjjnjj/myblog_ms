@@ -4,9 +4,8 @@ package com.njj.blog.service.imp;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.njj.blog.common.config.RabbitMQConfig;
+import com.njj.blog.common.constans.RabbitMQConstant;
 import com.njj.blog.feign.clients.MailClient;
-import com.njj.blog.common.response.ResponseResult;
 import com.njj.blog.common.util.common.date.DateUtils;
 import com.njj.blog.common.util.common.string.StringUtils;
 import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
@@ -49,7 +48,7 @@ public class BlogContentServiceImp implements BlogContentService {
 
     private RabbitTemplate rabbitTemplate;
 
-    private MailClient mailClient;
+//    private MailClient mailClient;
 
     @Value("${blog.mail.sendMail}")
     private boolean sendMail;
@@ -138,9 +137,7 @@ public class BlogContentServiceImp implements BlogContentService {
                     publishDatetime(DateUtils.formatDate(new Date(blogMetadataInfo.getPublishDatetime().getTime()),DateUtils.DATE_FORMAT_DATETIME)).
                     build();
             // 使用消息队列实现异步调用
-            rabbitTemplate.convertAndSend(RabbitMQConfig.MAIL_DIRECT_EXCHANGE,RabbitMQConfig.MAIL_DIRECT_ROUTING,blogMetadataDTO);
-            //TODO: 倪佳俊 2023/4/6 20:56 [] 异步调用，不可阻塞发布博客操作
-            ResponseResult<String> stringResponseResult = mailClient.sendMail(blogMetadataDTO);
+            rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_PUBLISH_FANOUT_EXCHANGE,"",blogMetadataDTO);
         }
     }
 
@@ -193,10 +190,10 @@ public class BlogContentServiceImp implements BlogContentService {
         this.restTemplate = restTemplate;
     }
 
-    @Autowired
-    public void setMailClient(MailClient mailClient) {
-        this.mailClient = mailClient;
-    }
+//    @Autowired
+//    public void setMailClient(MailClient mailClient) {
+//        this.mailClient = mailClient;
+//    }
 
     @Autowired
     public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {

@@ -18,21 +18,21 @@ import java.util.List;
 @RestController
 public class BlogSearchController implements BlogSearchClient {
 
-    private BlogSearchService blogSearchService;
-
-    @Override
-    public ResponseResult<List<BlogDTO>> searchBlog(String keyword) {
-        ResponseUtil.success(blogSearchService.searchBlog(keyword));
-    }
-
-    @Override
-    public ResponseResult<String> addBlog(BlogDTO blogDTO) {
-
-        return null;
-    }
-
-    @Autowired
-    public void setBlogSearchService(BlogSearchService blogSearchService) {
-        this.blogSearchService = blogSearchService;
-    }
+//    private BlogSearchService blogSearchService;
+//
+//    @Override
+//    public ResponseResult<List<BlogDTO>> searchBlog(String keyword) {
+//        ResponseUtil.success(blogSearchService.searchBlog(keyword));
+//    }
+//
+//    @Override
+//    public ResponseResult<String> addBlog(BlogDTO blogDTO) {
+//
+//        return null;
+//    }
+//
+//    @Autowired
+//    public void setBlogSearchService(BlogSearchService blogSearchService) {
+//        this.blogSearchService = blogSearchService;
+//    }
 }

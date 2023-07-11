@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = "com.njj.blog") // spring ioc 扫包配置
 @MapperScan("com.njj.blog.mapper") // mybatis 扫包配置
-@EnableFeignClients(basePackages = "com.njj.blog.clients")
+//@EnableFeignClients(basePackages = "com.njj.blog.clients")
 public class BlogCoreServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(BlogCoreServiceApplication.class,args);

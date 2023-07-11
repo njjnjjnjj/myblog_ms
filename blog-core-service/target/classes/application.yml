@@ -13,7 +13,7 @@ spring:
     host: 127.0.0.1
   datasource:
     name: myblogDatabase
-    url: jdbc:mysql://localhost:3305/myblog
+    url: jdbc:mysql://localhost:3304/myblog
     username: root
     password: 890890iop
     driver-class-name: com.mysql.cj.jdbc.Driver
