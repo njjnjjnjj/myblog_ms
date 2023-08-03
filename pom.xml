@@ -58,6 +58,13 @@
 
     <dependencyManagement>
         <dependencies>
+<!--            dev tools-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>
             <!--        SpringMVC相关依赖-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

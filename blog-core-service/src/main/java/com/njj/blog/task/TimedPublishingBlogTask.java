@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 
-@Component
+//@Component
 public class TimedPublishingBlogTask {
     public static final String PRE_PUBLISHED_BLOG_KEY = "prePublishedBlog";
 

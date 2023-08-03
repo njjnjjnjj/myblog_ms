@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
  * @author 倪佳俊
  * @date 2023/06/25 21:46
  **/
-@Configuration
+//@Configuration
 @EnableRabbit
 public class RabbitMQConfig implements BeanPostProcessor{
 
