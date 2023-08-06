@@ -55,3 +55,9 @@ mybatis-plus:
 #blog:
 #  mail:
 #    sendMail: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
