@@ -1,11 +1,16 @@
 <script setup lang="ts">
-
+import BlogSearcher from "@/components/BlogSearcher.vue";
 </script>
 
 <template>
-  <p>
-    Edit <code>src/views/IndexView.vue</code> to test hot module replacement.
-  </p>
+  <el-container>
+    <el-header>
+      <BlogSearcher></BlogSearcher>
+    </el-header>
+    <el-main>
+      <p>this is main</p>
+    </el-main>
+  </el-container>
 </template>
 
 <style scoped>
