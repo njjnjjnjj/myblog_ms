@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import BlogSearcher from "@/components/BlogSearcher.vue";
+import BlogIndexHeader  from "@/components/BlogIndexHeader.vue";
+import BlogIndexMain from "@/components/BlogIndexMain.vue";
 </script>
 
 <template>
   <el-container>
     <el-header>
-      <BlogSearcher></BlogSearcher>
+      <BlogIndexHeader></BlogIndexHeader>
     </el-header>
     <el-main>
-      <p>this is main</p>
+      <BlogIndexMain></BlogIndexMain>
     </el-main>
   </el-container>
 </template>
