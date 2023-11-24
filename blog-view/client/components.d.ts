@@ -7,11 +7,14 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlogContentCard: typeof import('./src/components/BlogContentCard.vue')['default']
     BlogIndexHeader: typeof import('./src/components/BlogIndexHeader.vue')['default']
     BlogIndexMain: typeof import('./src/components/BlogIndexMain.vue')['default']
     BlogSearcher: typeof import('./src/components/BlogSearcher.vue')['default']
+    BlogSubscription: typeof import('./src/components/BlogSubscription.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']
     ElHeader: typeof import('element-plus/es')['ElHeader']
