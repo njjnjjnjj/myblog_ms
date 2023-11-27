@@ -42,3 +42,7 @@
     top: var(--index-head-height);
     height: calc(100vh - var(--index-head-height)) !important;
 }
+
+.blog-content-list .el-card:not(:last-child){
+    margin-bottom: 20px;
+}

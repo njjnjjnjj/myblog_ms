@@ -7,14 +7,42 @@ defineProps({
   }
 })
 
+// 查看完整博客内容
+function gotoBlogContentDetail(){
+  console.log("查看完整博客内容");
+}
+
 </script>
 
 <template>
   <el-card>
     <template #header>
-      {{blogContent.title}}
+      <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            flex-direction: row;
+      ">
+        <p style="font-size: 18px;font-weight: bold;cursor:pointer;">{{ blogContent.title }}</p>
+        <p>2023-11-27 17:14:01</p>
+      </div>
     </template>
-    <p>{{blogContent.content}}</p>
+    <el-container>
+      <el-main style="padding: 0;">
+        <p>{{ blogContent.content }}</p>
+      </el-main>
+      <el-footer style="
+            height: 32px;
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;"
+      >
+        <el-button @click="gotoBlogContentDetail">继续阅读</el-button>
+      </el-footer>
+    </el-container>
+
+
   </el-card>
 </template>
 

@@ -13,14 +13,16 @@ let blogContentList = ref<BlogContent[]>([]);
 // 循环插入重复数据，模拟多条数据
 for (let i = 0; i < 20; i++) {
   blogContentList.value.push({
-    title: "title" + i,
-    content: "content" + i
+    title: "你好标题" + i,
+    content: "你好内容" + i
   });
 }
 </script>
 
 <template>
-  <BlogContentCard v-for="item of blogContentList" :key="item.title" :blog-content="item"></BlogContentCard>
+  <div class="blog-content-list">
+    <BlogContentCard v-for="item of blogContentList" :key="item.title" :blog-content="item"></BlogContentCard>
+  </div>
 </template>
 
 <style scoped>

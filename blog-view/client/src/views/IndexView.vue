@@ -8,7 +8,7 @@ import BlogIndexMain from "@/components/BlogIndexMain.vue";
     <el-header class="blog-index-header">
       <BlogIndexHeader></BlogIndexHeader>
     </el-header>
-    <el-scrollbar class="blog-index-scrollbar">
+    <el-scrollbar class="blog-index-scrollbar" v-infinite-scroll="load">
       <el-main>
         <BlogIndexMain></BlogIndexMain>
       </el-main>
