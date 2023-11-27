@@ -1,4 +1,10 @@
+:root{
+    --index-head-height: 60px;
+    --index-head-searcher-width: 350px;
+}
+
 body {
     min-height: 100vh;
     margin: 0;
+    overflow: hidden;
 }

@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    BlogCalendarCard: typeof import('./src/components/BlogCalendarCard.vue')['default']
     BlogContentCard: typeof import('./src/components/BlogContentCard.vue')['default']
     BlogIndexHeader: typeof import('./src/components/BlogIndexHeader.vue')['default']
     BlogIndexMain: typeof import('./src/components/BlogIndexMain.vue')['default']
@@ -17,6 +18,7 @@ declare module 'vue' {
     ElAside: typeof import('element-plus/es')['ElAside']
     ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
     ElContainer: typeof import('element-plus/es')['ElContainer']

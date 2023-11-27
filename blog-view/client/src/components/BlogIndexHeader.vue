@@ -10,16 +10,18 @@ function gotoIndex(){
 </script>
 
 <template>
-  <div class="blog-index-header">
-    <el-row>
-      <el-col :span="8">
-        <el-image :src="logo" style="" @click="gotoIndex"></el-image>
-      </el-col>
-      <el-col :span="8"></el-col>
-      <el-col :span="8">
-        <BlogSearcher></BlogSearcher>
-      </el-col>
-    </el-row>
+  <div class="blog-index-header-flex">
+    <el-image alt="回到首页" id="blog-index-header-logo" :src="logo" style="" @click="gotoIndex"></el-image>
+    <BlogSearcher></BlogSearcher>
+<!--    <el-row>-->
+<!--      <el-col :span="8">-->
+<!--        <el-image id="blog-index-header-logo" :src="logo" style="" @click="gotoIndex"></el-image>-->
+<!--      </el-col>-->
+<!--      <el-col :span="8"></el-col>-->
+<!--      <el-col :span="8">-->
+<!--        <BlogSearcher></BlogSearcher>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
   </div>
 </template>
 

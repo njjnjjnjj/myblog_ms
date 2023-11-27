@@ -10,12 +10,14 @@ function search() {
 </script>
 
 <template>
-  <!--  //TODO: 倪佳俊  [] 这里的 placeholder 使用 i18n 不写死-->
-  <el-input v-model="searchContent" placeholder="">
-    <template #append>
-      <el-button :icon="Search" @click="search"/>
-    </template>
-  </el-input>
+  <div class="blog-index-header-searcher">
+    <!--  //TODO: 倪佳俊  [] 这里的 placeholder 使用 i18n 不写死-->
+    <el-input v-model="searchContent" placeholder="">
+      <template #append>
+        <el-button :icon="Search" @click="search"/>
+      </template>
+    </el-input>
+  </div>
 </template>
 
 <style scoped>
