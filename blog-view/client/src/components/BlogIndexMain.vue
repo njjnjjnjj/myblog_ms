@@ -16,7 +16,6 @@ import BlogCalendarCard from "@/components/BlogCalendarCard.vue";
       <BlogMusicShare></BlogMusicShare>
       <BlogCalendarCard></BlogCalendarCard>
     </el-aside>
-    <el-backtop :right="50" :bottom="50"/>
   </el-container>
 </template>
 

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import image from "@/assets/image.jpeg";
 
 defineProps({
   blogContent: {
@@ -30,6 +31,7 @@ function gotoBlogContentDetail(){
     </template>
     <el-container>
       <el-main style="padding: 0;">
+        <el-image :src="image"></el-image>
         <p>{{ blogContent.content }}</p>
       </el-main>
       <el-footer style="
