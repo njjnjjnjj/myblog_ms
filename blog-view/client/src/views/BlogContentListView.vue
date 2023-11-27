@@ -10,10 +10,13 @@ type BlogContent = {
 
 let blogContentList = ref<BlogContent[]>([]);
 
-blogContentList.value.push({
-  title: "title1",
-  content: "content1"
-});
+// 循环插入重复数据，模拟多条数据
+for (let i = 0; i < 20; i++) {
+  blogContentList.value.push({
+    title: "title" + i,
+    content: "content" + i
+  });
+}
 </script>
 
 <template>
