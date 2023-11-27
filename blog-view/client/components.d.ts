@@ -10,6 +10,7 @@ declare module 'vue' {
     BlogContentCard: typeof import('./src/components/BlogContentCard.vue')['default']
     BlogIndexHeader: typeof import('./src/components/BlogIndexHeader.vue')['default']
     BlogIndexMain: typeof import('./src/components/BlogIndexMain.vue')['default']
+    BlogMusicShare: typeof import('./src/components/BlogMusicShare.vue')['default']
     BlogSearcher: typeof import('./src/components/BlogSearcher.vue')['default']
     BlogSubscription: typeof import('./src/components/BlogSubscription.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
