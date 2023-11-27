@@ -4,7 +4,7 @@ import BlogIndexMain from "@/components/BlogIndexMain.vue";
 </script>
 
 <template>
-  <el-container>
+  <el-container style="width: 100%; height: 100%">
     <el-header>
       <BlogIndexHeader></BlogIndexHeader>
     </el-header>
@@ -15,5 +15,8 @@ import BlogIndexMain from "@/components/BlogIndexMain.vue";
 </template>
 
 <style scoped>
-
+  html{
+    height: 100%;
+    width: 100%;
+  }
 </style>

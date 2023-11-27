@@ -7,7 +7,7 @@ import BlogMusicShare from "@/components/BlogMusicShare.vue";
 
 <template>
   <el-container>
-    <el-main width="70vw">
+    <el-main>
       <RouterView></RouterView>
     </el-main>
     <el-aside width="30vw" class="blog-index-aside">
