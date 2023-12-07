@@ -1,26 +1,27 @@
+
 spring:
   application:
     name: blog-core-service
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: guest
+#    password: guest
   redis:
     database: 0
     port: 6379
     password:
-    host: 192.168.31.180
+    host: 127.0.0.1
   datasource:
     name: myblogDatabase
-    url: jdbc:mysql://192.168.31.180:3308/myblog
+    url: jdbc:mysql://127.0.0.1:3304/myblog
     username: root
-    password: 890890
+    password: 890890iop
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
   cloud:
     nacos:
-      server-addr: 192.168.31.180:8848
+      server-addr: 127.0.0.1:8848
 #      discovery:
 #        cluster-name: NJ # 集群名称
 #        namespace: 6187f42f-0662-4811-abd3-112ac0e56918
@@ -61,3 +62,5 @@ management:
     web:
       exposure:
         include: health,info,metrics
+server:
+  port: 1108

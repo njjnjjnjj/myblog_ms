@@ -1,15 +1,6 @@
 package com.njj.blog.config;
 
-import com.njj.blog.common.constans.RabbitMQConstant;
-import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * RabbitMQ配置类，定义队列与交换机以及它们的绑定关系
@@ -18,9 +9,9 @@ import org.springframework.context.annotation.Configuration;
  * @date 2023/06/25 21:46
  **/
 //@Configuration
-@EnableRabbit
+//@EnableRabbit
 public class RabbitMQConfig implements BeanPostProcessor{
-
+/*
     private RabbitAdmin rabbitAdmin;
 
     @Bean
@@ -75,5 +66,5 @@ public class RabbitMQConfig implements BeanPostProcessor{
     @Autowired
     public void setRabbitAdmin(RabbitAdmin rabbitAdmin) {
         this.rabbitAdmin = rabbitAdmin;
-    }
+    }*/
 }

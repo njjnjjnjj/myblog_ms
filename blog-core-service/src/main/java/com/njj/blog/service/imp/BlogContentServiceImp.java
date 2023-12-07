@@ -5,19 +5,18 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.njj.blog.common.constans.RabbitMQConstant;
-import com.njj.blog.feign.clients.MailClient;
 import com.njj.blog.common.util.common.date.DateUtils;
 import com.njj.blog.common.util.common.string.StringUtils;
-import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
 import com.njj.blog.entity.BlogContentInfo;
 import com.njj.blog.entity.BlogMetadataInfo;
 import com.njj.blog.entity.BlogRequestBody;
 import com.njj.blog.entity.BlogResponseData;
+import com.njj.blog.feign.dto.SendMailBlogMetadataDTO;
 import com.njj.blog.mapper.BlogContentInfoMapper;
 import com.njj.blog.mapper.BlogMetadataInfoMapper;
 import com.njj.blog.service.BlogContentService;
 import com.njj.blog.task.TimedPublishingBlogTask;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +45,7 @@ public class BlogContentServiceImp implements BlogContentService {
 
     private RestTemplate restTemplate;
 
-    private RabbitTemplate rabbitTemplate;
+//    private RabbitTemplate rabbitTemplate;
 
 //    private MailClient mailClient;
 
@@ -137,7 +136,7 @@ public class BlogContentServiceImp implements BlogContentService {
                     publishDatetime(DateUtils.formatDate(new Date(blogMetadataInfo.getPublishDatetime().getTime()),DateUtils.DATE_FORMAT_DATETIME)).
                     build();
             // 使用消息队列实现异步调用
-            rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_PUBLISH_FANOUT_EXCHANGE,"",blogMetadataDTO);
+//            rabbitTemplate.convertAndSend(RabbitMQConstant.BLOG_PUBLISH_FANOUT_EXCHANGE,"",blogMetadataDTO);
         }
     }
 
@@ -195,8 +194,8 @@ public class BlogContentServiceImp implements BlogContentService {
 //        this.mailClient = mailClient;
 //    }
 
-    @Autowired
-    public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
+//    @Autowired
+//    public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
+//        this.rabbitTemplate = rabbitTemplate;
+//    }
 }
