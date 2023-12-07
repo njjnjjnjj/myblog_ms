@@ -44,6 +44,20 @@ stages:
         notify: []
         strategy:
           retry: '0'
+  - name: stage-854f067b
+    displayName: 上传制品
+    strategy: naturally
+    trigger: auto
+    executor: []
+    steps:
+      - step: publish@general_artifacts
+        name: publish_general_artifacts
+        displayName: 上传制品
+        dependArtifact: BUILD_ARTIFACT
+        artifactName: output
+        notify: []
+        strategy:
+          retry: '0'
   - name: stage-fb725afa
     displayName: 发布
     strategy: naturally
@@ -60,7 +74,7 @@ stages:
         strategy:
           retry: '0'
   - name: stage-658e3e3d
-    displayName: 未命名
+    displayName: 部署
     strategy: naturally
     trigger: auto
     executor: []
