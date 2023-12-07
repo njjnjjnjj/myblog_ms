@@ -43,8 +43,8 @@ public class BlogContentController {
 
     @GetMapping("/content/query/all/{publishMode}")
     public ResponseResult<List<BlogMetadataInfo>> getAllBlog(@PathVariable("publishMode") String publishMode){
-        blogContentService.getAllBlogMetadataByPublishMode(publishMode);
-        return ResponseUtil.success();
+        List<BlogMetadataInfo> allBlogMetadataByPublishMode = blogContentService.getAllBlogMetadataByPublishMode(publishMode);
+        return ResponseUtil.success(allBlogMetadataByPublishMode);
     }
 
     @Autowired

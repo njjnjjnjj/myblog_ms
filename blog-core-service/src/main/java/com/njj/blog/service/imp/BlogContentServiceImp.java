@@ -144,7 +144,8 @@ public class BlogContentServiceImp implements BlogContentService {
     public List<BlogMetadataInfo> getAllBlogMetadataByPublishMode(String publishMode) {
         LambdaQueryWrapper<BlogMetadataInfo> blogMetadataInfoLambdaQueryWrapper = new LambdaQueryWrapper<BlogMetadataInfo>();
         blogMetadataInfoLambdaQueryWrapper.eq(BlogMetadataInfo::getPublishMode,publishMode);
-        return blogMetadataInfoMapper.selectList(blogMetadataInfoLambdaQueryWrapper);
+        List<BlogMetadataInfo> blogMetadataInfos = blogMetadataInfoMapper.selectList(blogMetadataInfoLambdaQueryWrapper);
+        return blogMetadataInfos;
     }
 
     /**

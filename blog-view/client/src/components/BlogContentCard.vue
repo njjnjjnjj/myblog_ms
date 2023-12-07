@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import image from "@/assets/image.jpeg";
+import type {BlogMetadata} from "@/apis/interfaces";
 
 defineProps({
   blogContent: {
-    type: Object,
+    type: Object as () => BlogMetadata,
     required: true
   }
 })
 
 // 查看完整博客内容
-function gotoBlogContentDetail(){
+function gotoBlogContentDetail() {
   console.log("查看完整博客内容");
 }
 
@@ -26,13 +27,13 @@ function gotoBlogContentDetail(){
             flex-direction: row;
       ">
         <p style="font-size: 18px;font-weight: bold;cursor:pointer;">{{ blogContent.title }}</p>
-        <p>2023-11-27 17:14:01</p>
+        <p>{{blogContent.publishDatetime}}</p>
       </div>
     </template>
     <el-container>
       <el-main style="padding: 0;">
-        <el-image :src="image"></el-image>
-        <p>{{ blogContent.content }}</p>
+<!--        <el-image :src="image"></el-image>-->
+        <p>{{ blogContent.contentSummary }}</p>
       </el-main>
       <el-footer style="
             height: 32px;
