@@ -27,7 +27,7 @@ stages:
           - '#    -e -X ：打印调试信息，定位疑难构建问题时建议使用此参数构建'
           - '#    -B：以batch模式运行，可避免日志打印时出现ArrayIndexOutOfBoundsException异常'
           - '# 使用场景：打包项目且不需要执行单元测试时使用'
-          - mvn clean package -Dmaven.test.skip=true -e -X -B
+          - mvn clean package install -Dmaven.test.skip=true -e -X -B
           - ''
           - '# 功能：自定义settings配置'
           - '# 使用场景：如需手工指定settings.xml，可使用如下方式'
@@ -87,10 +87,12 @@ stages:
           hostID:
             - 43c4aa11-0817-4ecb-a774-f2c682426b69
         deployArtifact:
-          - source: build
+          - source: artifact
             name: output
             target: ~/gitee_go/deploy
-            dependArtifact: output
+            artifactRepository: release
+            artifactName: output
+            artifactVersion: latest
         script:
           - '# 功能：部署脚本会在部署主机组的每台机器上执行'
           - '# 使用场景：先将制品包解压缩到指定目录中，再执行启动脚本deploy.sh，脚本示例地址：https://gitee.com/gitee-go/spring-boot-maven-deploy-case/blob/master/deploy.sh'
