@@ -3,6 +3,8 @@ package com.njj.blog.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.njj.blog.common.response.sensitive.SensitiveData;
+import com.njj.blog.common.response.sensitive.SensitiveField;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Tolerate;
@@ -18,6 +20,7 @@ import java.sql.Timestamp;
 @Data
 @Builder
 @TableName("t_blog_metadata")
+@SensitiveData
 public class BlogMetadataInfo implements Serializable{
     /**
      * 发布状态 —— 已发布
@@ -68,8 +71,12 @@ public class BlogMetadataInfo implements Serializable{
     private String authorId;
     private String title;
     private String contentSummary;
+    @SensitiveField
     private String publishMode;
+    @SensitiveField
     private String visibility;
+    @SensitiveField
     private String accessPassword;
+    @SensitiveField
     private Timestamp prePublishDatetime;
 }
