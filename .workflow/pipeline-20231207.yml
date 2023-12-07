@@ -33,7 +33,7 @@ stages:
           - '# 使用场景：如需手工指定settings.xml，可使用如下方式'
           - '# 注意事项：如无需自定义settings配置且需要私有依赖仓库，可在该任务配置《私有仓库》处添加私有依赖'
           - '# mvn -U clean package -s ./settings.xml'
-          - ''
+          - mkdir ./target
         artifacts:
           - name: BUILD_ARTIFACT
             path:
