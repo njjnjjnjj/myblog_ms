@@ -67,14 +67,23 @@
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-httpclient</artifactId>
         </dependency>
-        <dependency>
-            <artifactId>feign-api</artifactId>
-            <groupId>com.njj.blog.feign</groupId>
-        </dependency>
         <!-- 消息队列 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.26</version>
+        </dependency>
+        <dependency>
+            <groupId>com.njj.blog</groupId>
+            <artifactId>blog-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.njj.blog</groupId>
+            <artifactId>feign-api</artifactId>
         </dependency>
     </dependencies>
 

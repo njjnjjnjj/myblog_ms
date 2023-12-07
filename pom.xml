@@ -4,14 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>eureka-server</module>
         <module>blog-core-service</module>
         <module>blog-common</module>
         <module>blog-mail-service</module>
         <module>blog-file-service</module>
         <module>feign-api</module>
         <module>gateway-server</module>
-        <module>just-for-practices</module>
         <module>blog-search-service</module>
     </modules>
     <parent>
@@ -36,7 +34,7 @@
     <description>myblog_ms</description>
 
     <dependencies>
-<!--        SpringBoot相关依赖-->
+        <!--        SpringBoot相关依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -50,7 +48,7 @@
 
     <dependencyManagement>
         <dependencies>
-<!--            dev tools-->
+            <!--            dev tools-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
@@ -71,7 +69,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-<!--            Nacos-->
+            <!--            Nacos-->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -79,12 +77,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-                <version>2.2.7.RELEASE</version>
-            </dependency>
-<!--            springAop-->
+            <!--            springAop-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
@@ -97,13 +90,13 @@
                 <version>8.0.31</version>
                 <scope>runtime</scope>
             </dependency>
-<!--            Redis依赖-->
+            <!--            Redis依赖-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
                 <version>2.7.8</version>
             </dependency>
-<!--            德鲁伊连接池-->
+            <!--            德鲁伊连接池-->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
@@ -120,47 +113,53 @@
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>3.5.3</version>
             </dependency>
-<!--            mail依赖-->
+            <!--            mail依赖-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-mail</artifactId>
                 <version>2.7.8</version>
             </dependency>
-<!--            thymeleaf依赖-->
+            <!--            thymeleaf依赖-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-thymeleaf</artifactId>
                 <version>2.7.8</version>
             </dependency>
-<!--            lombok-->
+            <!--            lombok-->
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.24</version>
             </dependency>
-<!--            工具类-->
+            <!--            工具类-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>3.11</version>
             </dependency>
-<!--            feign-api -->
+            <!--            feign-api -->
             <dependency>
                 <artifactId>feign-api</artifactId>
-                <groupId>com.njj.blog.feign</groupId>
+                <groupId>com.njj.blog</groupId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
-<!--            es客户端-->
-<!--            <dependency>-->
-<!--                <groupId>org.elasticsearch</groupId>-->
-<!--                <artifactId>elasticsearch</artifactId>-->
-<!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>org.elasticsearch.client</groupId>-->
-<!--                <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
-<!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
-<!--            </dependency>-->
+            <dependency>
+                <artifactId>blog-common</artifactId>
+                <groupId>com.njj.blog</groupId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <!--            es客户端-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.elasticsearch</groupId>-->
+            <!--                <artifactId>elasticsearch</artifactId>-->
+            <!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
+            <!--            </dependency>-->
+            <!--            <dependency>-->
+            <!--                <groupId>org.elasticsearch.client</groupId>-->
+            <!--                <artifactId>elasticsearch-rest-high-level-client</artifactId>-->
+            <!--&lt;!&ndash;                <version>${es-version}</version>&ndash;&gt;-->
+            <!--            </dependency>-->
+
         </dependencies>
     </dependencyManagement>
 

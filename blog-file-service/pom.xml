@@ -22,6 +22,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
+        <dependency>
+            <artifactId>blog-common</artifactId>
+            <groupId>com.njj.blog</groupId>
+        </dependency>
     </dependencies>
+
+
 
 </project>

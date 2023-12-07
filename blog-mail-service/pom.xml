@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.njj.blog.mail</groupId>
     <artifactId>blog-mail-service</artifactId>
 
     <properties>
@@ -42,7 +41,7 @@
         </dependency>
         <dependency>
             <artifactId>feign-api</artifactId>
-            <groupId>com.njj.blog.feign</groupId>
+            <groupId>com.njj.blog</groupId>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.cloud</groupId>-->
