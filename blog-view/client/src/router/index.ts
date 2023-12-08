@@ -5,7 +5,8 @@ import BlogContentListView from "@/views/BlogContentListView.vue";
 import BlogContentView from "@/views/BlogContentView.vue";
 
 const router = createRouter({
-    history: createWebHistory(import.meta.env.BASE_URL),
+    // import.meta.env.BASE_URL
+    history: createWebHistory("/"),
     routes: [
         {
             path: '/',

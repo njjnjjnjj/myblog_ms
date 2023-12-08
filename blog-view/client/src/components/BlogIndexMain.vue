@@ -11,7 +11,6 @@ import Router from "@/router";
 <template>
   <el-container>
     <el-main>
-      this is router {{$router}}
       <keep-alive>
         <RouterView v-if="$router.currentRoute.value.meta?.keepAlive"></RouterView>
       </keep-alive>

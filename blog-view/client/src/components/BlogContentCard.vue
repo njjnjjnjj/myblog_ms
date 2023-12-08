@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import image from "@/assets/image.jpeg";
 import type {BlogMetadata} from "@/apis/interfaces";
 import {computed, onMounted, ref} from "vue";
 import Router from "@/router";
@@ -14,7 +13,7 @@ let props = defineProps({
 
 // 查看完整博客内容
 function gotoBlogContentDetail() {
-  console.log("查看完整博客内容", props.blogContent?.metadataId);
+  console.debug("查看完整博客内容", props.blogContent?.metadataId);
   Router.push(`/blog_content/${props.blogContent?.metadataId}`);
 }
 

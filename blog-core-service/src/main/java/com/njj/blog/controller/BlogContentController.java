@@ -32,9 +32,9 @@ public class BlogContentController {
         return ResponseUtil.success();
     }
 
-    @GetMapping("/content")
-    public ResponseResult<BlogResponseData> loadBlogContent(String blogId){
-        BlogResponseData blogResponseData = blogContentService.loadBlogContent(blogId);
+    @GetMapping("/content/{metadataId}")
+    public ResponseResult<BlogResponseData> loadBlogContent(@PathVariable("metadataId") String metadataId){
+        BlogResponseData blogResponseData = blogContentService.loadBlogContent(metadataId);
         return ResponseUtil.success(blogResponseData,null);
     }
 

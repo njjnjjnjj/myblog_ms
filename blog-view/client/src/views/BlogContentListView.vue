@@ -20,7 +20,6 @@ function loadBlogList() {
     current: currentPage,
     size: pageSize
   }).then((result) => {
-    debugger;
     blogMetadataList.value?.push(...result.records);
     console.debug(blogMetadataList.value);
   });

@@ -14,6 +14,10 @@ export interface BlogMetadata {
     prePublishDatetime: string;
 }
 
+export interface BlogContentData extends BlogMetadata {
+    blogContent: string
+}
+
 export interface OrderItem {
     column: string,
     asc?: boolean
