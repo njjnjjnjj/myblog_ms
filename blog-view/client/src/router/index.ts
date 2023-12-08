@@ -18,9 +18,10 @@ const router = createRouter({
                     component: BlogContentListView,
                 },
                 {
-                    path: 'blog_content',
+                    path: 'blog_content/:metadataId',
                     name: 'blog_content',
                     component: BlogContentView,
+                    props: true
                 }
             ]
         },

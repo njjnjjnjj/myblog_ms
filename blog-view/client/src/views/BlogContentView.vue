@@ -1,13 +1,23 @@
 <script setup lang="ts">
-function goBack() {
-  this.$router.go(-1);
+
+import Router from "@/router";
+
+let props = defineProps({
+  metadataId:{
+    type: String,
+    required: true
+  }
+})
+
+function goBack(){
+  Router.go(-1);
 }
 </script>
 
 <template>
   <el-page-header @back="goBack">
     <template #content>
-      Title
+      {{metadataId}}
     </template>
   </el-page-header>
   <el-main style="background: red">

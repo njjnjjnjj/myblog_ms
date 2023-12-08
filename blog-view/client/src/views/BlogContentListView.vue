@@ -15,26 +15,27 @@ let currentPage = 1;
 //TODO: 倪佳俊 [] 可配置
 const pageSize = 10;
 
-function loadBlogList(){
+function loadBlogList() {
   queryBlog("published", {
     current: currentPage,
     size: pageSize
-  }).then((result)=>{
+  }).then((result) => {
     debugger;
     blogMetadataList.value?.push(...result.records);
     console.debug(blogMetadataList.value);
   });
 }
 
-function loadMore(){
-  currentPage ++;
+function loadMore() {
+  currentPage++;
   loadBlogList();
 }
 </script>
 
 <template>
   <div class="blog-content-list">
-    <BlogContentCard v-for="blogMetadata of blogMetadataList" :key="blogMetadata.metadataId" :blog-content="blogMetadata"></BlogContentCard>
+    <BlogContentCard v-for="blogMetadata of blogMetadataList" :key="blogMetadata.metadataId"
+                     :blog-content="blogMetadata"></BlogContentCard>
     <el-button @click="loadMore">加载更多</el-button>
   </div>
 </template>
