@@ -3,6 +3,7 @@ package com.njj.blog.entity;
 import lombok.Builder;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -18,4 +19,5 @@ public class BlogRequestBody {
     private String accessPassword;
     private String publishMode;
     private Date prePublishDatetime;
+    private Date publishDatetime;
 }

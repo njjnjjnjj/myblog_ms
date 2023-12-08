@@ -10,6 +10,9 @@ import java.util.Date;
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     public static String DATE_FORMAT_DATE = "yyyyMMdd";
+
+    public static String DATE_FORMAT_DATE_SPLIT_WITH_SEPARATOR = "yyyy-MM-dd";
+
     public static String DATE_FORMAT_DATETIME  = "yyyy-MM-dd HH:mm:ss";
 
     public static String DATE_FORMAT_DATETIME_SIMPLE = "yyyyMMddHHmmss";

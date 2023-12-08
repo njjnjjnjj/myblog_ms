@@ -24,3 +24,10 @@ export interface Page {
     size: number,
     orders?: OrderItem[]
 }
+
+export interface ResponseResult<T> {
+    timestamp: number;
+    status: string;
+    message: string;
+    data: T;
+}

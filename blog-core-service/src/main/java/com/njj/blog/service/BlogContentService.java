@@ -5,6 +5,7 @@ import com.njj.blog.entity.BlogMetadataInfo;
 import com.njj.blog.entity.BlogRequestBody;
 import com.njj.blog.entity.BlogResponseData;
 
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -50,4 +51,6 @@ public interface BlogContentService {
      * @return 返还指定发布模式的所有博客
      */
     List<BlogMetadataInfo> getAllBlogMetadataByPublishMode(String publishMode);
+
+    void importBlog(String blogContent);
 }

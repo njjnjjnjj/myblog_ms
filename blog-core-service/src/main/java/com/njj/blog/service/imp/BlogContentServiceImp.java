@@ -3,9 +3,7 @@ package com.njj.blog.service.imp;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.njj.blog.common.constans.RabbitMQConstant;
 import com.njj.blog.common.util.common.date.DateUtils;
 import com.njj.blog.common.util.common.string.StringUtils;
 import com.njj.blog.entity.BlogContentInfo;
@@ -17,7 +15,6 @@ import com.njj.blog.mapper.BlogContentInfoMapper;
 import com.njj.blog.mapper.BlogMetadataInfoMapper;
 import com.njj.blog.service.BlogContentService;
 import com.njj.blog.task.TimedPublishingBlogTask;
-//import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,6 +26,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +58,7 @@ public class BlogContentServiceImp implements BlogContentService {
         String currentDatetime = DateUtils.formatCurrentDate(DateUtils.DATE_FORMAT_DATETIME);
         long timeMillis = System.currentTimeMillis();
         Timestamp currentTimeMills = new Timestamp(timeMillis);
-        blogMetadataBuilder.publishDatetime(currentTimeMills);
+        blogMetadataBuilder.publishDatetime(blogRequestBody.getPublishDatetime() == null ? currentTimeMills : new Timestamp(blogRequestBody.getPublishDatetime().getTime()));
         blogMetadataBuilder.updateDatetime(currentTimeMills);
         //TODO: 倪佳俊 2023/2/12 15:03 [] 获取作者id
         blogMetadataBuilder.authorId("13023468552");
@@ -92,10 +90,10 @@ public class BlogContentServiceImp implements BlogContentService {
             addPrePublishBlogToRedis(blogMetadataInfo);
         }
         // 发布
-        if (BlogMetadataInfo.PUBLISH_MODE_PUBLISHED.equals(blogMetadataInfo.getPublishMode())) {
-            //TODO: 倪佳俊 2023/3/30 22:56 [] 这里存在，数据库的重复操作
-            publishBlog(blogMetadataId);
-        }
+//        if (BlogMetadataInfo.PUBLISH_MODE_PUBLISHED.equals(blogMetadataInfo.getPublishMode())) {
+//            //TODO: 倪佳俊 2023/3/30 22:56 [] 这里存在，数据库的重复操作
+//            publishBlog(blogMetadataId);
+//        }
     }
 
     @Override
@@ -151,6 +149,41 @@ public class BlogContentServiceImp implements BlogContentService {
         blogMetadataInfoLambdaQueryWrapper.eq(BlogMetadataInfo::getPublishMode, publishMode);
         List<BlogMetadataInfo> blogMetadataInfos = blogMetadataInfoMapper.selectList(blogMetadataInfoLambdaQueryWrapper);
         return blogMetadataInfos;
+    }
+
+    @Override
+    public void importBlog(String blogContent) {
+        // 1. 提取博客元数据
+        String[] split = blogContent.split("---");
+        String blogMetadata = split[1];
+        String[] blogMetadataLines = blogMetadata.split("\n");
+        String title = blogMetadataLines[1].split(":")[1].trim();
+        // 去除title两边的 "
+        title = title.substring(1, title.length() - 1);
+        String date = blogMetadataLines[2].split(":")[1].trim();
+        String[] categories = blogMetadataLines[3].split(":")[1].trim().split("-");
+        // 2. 提取博客内容
+        String blogContentText = split[2].trim();
+        // 3. 保存博客元数据
+        BlogRequestBody.BlogRequestBodyBuilder builder = BlogRequestBody.builder()
+                .title(title)
+                .blogContent(blogContentText)
+                .publishMode(BlogMetadataInfo.PUBLISH_MODE_PUBLISHED)
+                .visibility(BlogMetadataInfo.VISIBILITY_PUBLIC);
+        // 将字符串变量date转换为Date
+        try {
+            if(!StringUtils.isEmpty(date)){
+                // 去掉两边的 "
+                date = date.substring(1, date.length() - 1);
+                Date publishDatetime = DateUtils.parseDate(date, DateUtils.DATE_FORMAT_DATE_SPLIT_WITH_SEPARATOR);
+                builder.publishDatetime(publishDatetime);
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        BlogRequestBody blogRequestBody = builder.build();
+
+        saveBlogContent(blogRequestBody);
     }
 
     /**

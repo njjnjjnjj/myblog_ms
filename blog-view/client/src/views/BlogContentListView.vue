@@ -13,7 +13,7 @@ onMounted(() => {
 
 let currentPage = 1;
 //TODO: 倪佳俊 [] 可配置
-const pageSize = 2;
+const pageSize = 10;
 
 function loadBlogList(){
   queryBlog("published", {

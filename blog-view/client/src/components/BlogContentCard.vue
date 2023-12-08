@@ -46,7 +46,7 @@ const formattedDate = computed(() => {
     <el-container>
       <el-main style="padding: 0;">
         <!--        <el-image :src="image"></el-image>-->
-        <v-md-editor v-model="blogContent.contentSummary" height="400px" mode="preview"></v-md-editor>
+        <v-md-editor v-model="blogContent.contentSummary" height="300px" mode="preview"></v-md-editor>
       </el-main>
       <el-footer style="
             height: 32px;
