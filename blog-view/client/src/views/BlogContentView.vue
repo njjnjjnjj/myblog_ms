@@ -1,6 +1,8 @@
 <script setup lang="ts">
 
 import Router from "@/router";
+import {onBeforeRouteLeave} from "vue-router";
+import router from "@/router";
 
 let props = defineProps({
   metadataId:{
@@ -9,8 +11,14 @@ let props = defineProps({
   }
 })
 
+onBeforeRouteLeave((to, from, next)=>{
+  debugger;
+  to.meta.keepAlive = true;
+  next();
+})
+
 function goBack(){
-  Router.go(-1);
+  Router.back();
 }
 </script>
 

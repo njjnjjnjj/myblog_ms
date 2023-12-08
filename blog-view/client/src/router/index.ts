@@ -16,6 +16,9 @@ const router = createRouter({
                     path: 'blog_list',
                     name: 'blog_list',
                     component: BlogContentListView,
+                    meta:{
+                        keepAlive: true
+                    }
                 },
                 {
                     path: 'blog_content/:metadataId',
