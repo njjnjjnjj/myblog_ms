@@ -13,3 +13,14 @@ export interface BlogMetadata {
     accessPassword: string;
     prePublishDatetime: string;
 }
+
+export interface OrderItem {
+    column: string,
+    asc?: boolean
+}
+
+export interface Page {
+    current: number,
+    size: number,
+    orders?: OrderItem[]
+}

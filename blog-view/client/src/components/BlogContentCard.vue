@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import image from "@/assets/image.jpeg";
 import type {BlogMetadata} from "@/apis/interfaces";
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
+
 
 let props = defineProps({
   blogContent: {
@@ -26,7 +27,6 @@ const formattedDate = computed(() => {
   return `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
 });
 
-
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const formattedDate = computed(() => {
     <el-container>
       <el-main style="padding: 0;">
         <!--        <el-image :src="image"></el-image>-->
-        <p>{{ blogContent.contentSummary }}</p>
+        <v-md-editor v-model="blogContent.contentSummary" height="400px" mode="preview"></v-md-editor>
       </el-main>
       <el-footer style="
             height: 32px;

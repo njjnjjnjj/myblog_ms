@@ -1,6 +1,6 @@
 import axios from 'axios';
 import type {AxiosResponse} from "axios";
-import type {BlogMetadata,PublishMode} from "./interfaces";
+import type {BlogMetadata, Page, PublishMode} from "./interfaces";
 
 // 封装 API 请求
 const api = axios.create({
@@ -9,5 +9,12 @@ const api = axios.create({
 
 export async function getAllBlog(publishMode: PublishMode) {
     const response: AxiosResponse<Array<BlogMetadata>> = await api.get(`/blog/content/query/all/${publishMode}`);
+    return response.data.data;
+}
+
+export async function queryBlog(publishMode: PublishMode, page: Page) {
+    const response: AxiosResponse<Array<BlogMetadata>> = await api.get(`/blog/content/query/${publishMode}`, {
+        params: page
+    });
     return response.data.data;
 }

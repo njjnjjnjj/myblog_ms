@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 public @interface SensitiveField {
 
     /**
-     * 处理敏感数据的方式
+     * 处理敏感数据的方式，默认置空
      */
     SensitiveFieldHandleMethod value() default SensitiveFieldHandleMethod.SET_NULL;
 

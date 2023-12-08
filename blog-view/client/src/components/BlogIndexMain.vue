@@ -12,9 +12,11 @@ import BlogCalendarCard from "@/components/BlogCalendarCard.vue";
       <RouterView></RouterView>
     </el-main>
     <el-aside width="30vw" class="blog-index-aside">
-      <BlogSubscription></BlogSubscription>
+<!--//TODO: 倪佳俊 逐渐实现其功能后取消注释  []-->
       <BlogMusicShare></BlogMusicShare>
-      <BlogCalendarCard></BlogCalendarCard>
+<!--      <BlogSubscription></BlogSubscription>
+      <BlogMusicShare></BlogMusicShare>
+      <BlogCalendarCard></BlogCalendarCard>-->
     </el-aside>
   </el-container>
 </template>

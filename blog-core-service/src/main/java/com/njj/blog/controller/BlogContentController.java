@@ -7,6 +7,8 @@ import com.njj.blog.entity.BlogMetadataInfo;
 import com.njj.blog.entity.BlogRequestBody;
 import com.njj.blog.entity.BlogResponseData;
 import com.njj.blog.service.BlogContentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blog")
+@Api
 public class BlogContentController {
 
     private BlogContentService blogContentService;
@@ -35,12 +38,14 @@ public class BlogContentController {
         return ResponseUtil.success(blogResponseData,null);
     }
 
+    @ApiOperation("对指定发布状态的博客进行分页查询")
     @GetMapping("/content/query/{publishMode}")
     public ResponseResult<Page<BlogMetadataInfo>> queryBlog(Page<BlogMetadataInfo> page, @PathVariable("publishMode") String publishMode){
         Page<BlogMetadataInfo> blogResponseDataPage = blogContentService.queryBlogMetadataByPublishMode(page,publishMode);
         return ResponseUtil.success(blogResponseDataPage);
     }
 
+    @ApiOperation("对指定发布状态的博客进行全部查询")
     @GetMapping("/content/query/all/{publishMode}")
     public ResponseResult<List<BlogMetadataInfo>> getAllBlog(@PathVariable("publishMode") String publishMode){
         List<BlogMetadataInfo> allBlogMetadataByPublishMode = blogContentService.getAllBlogMetadataByPublishMode(publishMode);
